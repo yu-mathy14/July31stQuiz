@@ -214,28 +214,27 @@ export default function QuestionForm({
 
     /* 親コンポーネントへ問題データを渡す */
     onAdd({
+        /* 問題idを生成 */
+        id: crypto.randomUUID(),
 
-      /* 問題idを生成 */
-      id: crypto.randomUUID(),
+        /* 問題文 */
+        text: data.text,
 
-      /* 問題文 */
-      text: data.text,
+        /* 選択肢 */
+        choices,
 
-      /* 選択肢 */
-      choices,
+        /* 正解の選択肢id */
+        correctChoiceId,
 
-      /* 正解の選択肢id */
-      correctChoiceId,
+        /* 解説 */
+        explanation: data.explanation,
 
-      /* 解説 */
-      explanation: data.explanation,
+        /* 制限時間 */
+        timeLimitSec: data.timeLimitSec,
 
-      /* 制限時間 */
-      timeLimitSec: data.timeLimitSec,
-
-      /* カテゴリ */
-      category: data.category,
-
+        /* カテゴリ */
+        category: data.category,
+    
     });
 
     /* フォームを初期状態へ戻す */

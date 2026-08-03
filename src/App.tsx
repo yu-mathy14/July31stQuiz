@@ -7,12 +7,13 @@
 import { useState } from "react";
 import QuizAuthoring from "./components/QuizAuthoring";
 import type { Question } from "./types";
+import { initialQuestions } from "./datas/question";
 
 function App() {
 
   /* 【useState】問題一覧を管理するState */
-  /* 初期値は空配列で、Question型のオブジェクトが入った配列型 */
-  const [questions, setQuestions] = useState<Question[]>([]);
+  /* 初期値は初期問題で、Question型のオブジェクトが入った配列型 */
+  const [questions, setQuestions] = useState<Question[]>(initialQuestions);
 
   /* QuestionFormから新しい問題が送られてきた時に実行するイベントハンドラー */
   const handleAdd = (question: Question) => {

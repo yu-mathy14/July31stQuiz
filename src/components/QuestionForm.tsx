@@ -184,6 +184,7 @@ export default function QuestionForm({
   /* サブミット成功時の処理 */
   const onSubmit: SubmitHandler<FormValues> = (data) => {
 
+    //  ユーザーが追加する新しい問題のIDを作るため
     /* 【crypto.randomUUID()】選択肢ごとに一意なidを生成し、変数に保存 */
     /* ∵ 各選択肢に一意なIDを付け、correctChoiceIdに同じIDを設定できるようにするため
     -> どの選択肢が正解か」を確実に管理できるようになる */

@@ -9,10 +9,7 @@ import { useId } from "react";
 import {useForm,type SubmitHandler,} from "react-hook-form";
 import * as yup from "yup";
 
-import type {
-  Category,
-  Question,
-} from "../types";
+import type { Category, Question,} from "../types";
 
 /* 【型エイリアス】型定義 */
 type QuestionFormProps = {
@@ -187,8 +184,9 @@ export default function QuestionForm({
   /* サブミット成功時の処理 */
   const onSubmit: SubmitHandler<FormValues> = (data) => {
 
-    /* 【crypto.randomUUID()】
-    選択肢ごとに一意なidを生成する */
+    /* 【crypto.randomUUID()】選択肢ごとに一意なidを生成し、変数に保存 */
+    /* ∵ 各選択肢に一意なIDを付け、correctChoiceIdに同じIDを設定できるようにするため
+    -> どの選択肢が正解か」を確実に管理できるようになる */
     const choiceId1 = crypto.randomUUID();
     const choiceId2 = crypto.randomUUID();
     const choiceId3 = crypto.randomUUID();

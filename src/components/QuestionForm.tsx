@@ -1,3 +1,8 @@
+// ================================================
+// 問題を入力・登録するフォームを表示するコンポーネント
+/* バリデーション付きの作問フォームを管理するコンポーネント */
+// ================================================
+
 /* Yupライブラリとreact-hook-formを繋げるアダプターのようなもの */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useId } from "react";
@@ -73,16 +78,24 @@ const schema = yup.object({
     /* 【独自ルール(test)】
     4つの選択肢に重複がないことを確認する */
     .test(
+      /* 第一引数 開発者が識別するためのテストの名前 */
       "duplicate-choice",
+      /* 第二引数 条件を満たさなかったときのエラーメッセージ */
       "選択肢が重複しています。",
+
+      /* 第三引数 valueがtrueならOK, falseならエラー */
+      /* value は choice4 の値 */
       function (value) {
 
+        /* choice4以外も取得できる */
+        /* this.parent -> フォーム全体の値(test〜category) */
         const {
           choice1,
           choice2,
           choice3,
         } = this.parent;
 
+        /* 全選択肢を格納した配列 */
         const choices = [
           choice1,
           choice2,
@@ -91,11 +104,17 @@ const schema = yup.object({
         ];
 
         /* Setを利用して重複を除外した件数を比較する */
+        /* Set(choices)で重複データを自動で消す */
+        /* .size -> オブジェクトの要素数、Set(choices)はオブジェクト */
+        /* .length -> 配列の要素数、choicesは配列 */
         return new Set(choices).size === choices.length;
       }
     ),
 
   correctChoice: yup
+    /* .mixed -> 決まった値だけ許可したい */
+    /* FormValues["correctChoice"]
+    -> この項目は"1" "2" "3" "4"だけを扱います */
     .mixed<FormValues["correctChoice"]>()
     .label("正解")
 
@@ -114,15 +133,21 @@ const schema = yup.object({
     .min(10, "${label}は10文字以上で入力してください。"),
 
   timeLimitSec: yup
+  /* number()を使う場合は、
+  required()だけでは空欄をうまく判定できないケースがあるため
+  typeError()も一緒に書く */
     .number()
     .label("制限時間")
+    /* 空欄で数字に変換できなかった時、意図したエラー文が表示されないことがある */
+    /* Yupのデフォルトエラー amount must be a `number` */
     .typeError("${label}は必須入力です。")
-    .integer("${label}は整数で入力してください。")
+    .integer("${label}は整数で入力してください。") // 整数チェック
     .min(5, "${label}は5秒以上で入力してください。")
     .max(120, "${label}は120秒以下で入力してください。")
-    .required("${label}は必須入力です。"),
+    .required("${label}は必須入力です。"), // 値が入力されているかの確認
 
   category: yup
+    /* .mixed -> 決まった値だけ許可したい */
     .mixed<Category>()
     .label("カテゴリ")
 
@@ -135,6 +160,7 @@ const schema = yup.object({
     .required("${label}は必須入力です。"),
 
 }).required();
+
 /* Reactコンポーネントを作るための関数 */
 export default function QuestionForm({
   /* QuestionFormProps型のオブジェクト */
@@ -258,6 +284,7 @@ export default function QuestionForm({
     });
 
   };
+
 return (
     <form className="question-form" onSubmit={handleSubmit(onSubmit)}>
       <h2>問題を登録</h2>

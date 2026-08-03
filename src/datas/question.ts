@@ -106,15 +106,15 @@ export const initialQuestions: Question[] = [
   },
   {
     id: crypto.randomUUID(),
-    text: "",
+    text: "イベントのデフォルト動作(ブラウザが標準で行う挙動)をキャンセルするメソッド？",
     choices: [
-      { id: choice1, label: "選択肢1" },
-      { id: choice2, label: "選択肢2" },
-      { id: choice3, label: "選択肢3" },
-      { id: choice4, label: "選択肢4" },
+      { id: choice1, label: "stopPropagation()" },
+      { id: choice2, label: "preventDefault()" },
+      { id: choice3, label: "stopImmediatePropagation()" },
+      { id: choice4, label: "target.reset()" },
     ],
-    correctChoiceId: choice4, // 正解の選択肢
-    explanation: "解説を入力", // 解説文
+    correctChoiceId: choice2, // 正解の選択肢
+    explanation: "preventDefault() はブラウザ標準の挙動をキャンセルします。", // 解説文
     timeLimitSec: 10, // 制限時間
     category: 'React', // 'JavaScript', 'TypeScript', 'React'のどれか
   }

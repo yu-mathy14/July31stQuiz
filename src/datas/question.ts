@@ -33,7 +33,7 @@ export const initialQuestions: Question[] = [
       { id: choice3, label: "Promise" },
       { id: choice4, label: "queueMacrotask" },
     ],
-    correctChoiceId: choice4, // 正解の選択肢
+    correctChoiceId: choice1, // 正解の選択肢
     explanation: "正解はsetTimeoutです。PromiseとqueueMicrotaskはジョブキューに入ります。queueMacrotaskは存在しません。", // 解説文
     timeLimitSec: 10, // 制限時間
     category: 'JavaScript', // 'JavaScript', 'TypeScript', 'React'のどれか

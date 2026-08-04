@@ -82,15 +82,12 @@ const schema = yup.object({
 
       /* 第三引数 valueがtrueならOK, falseならエラー */
       /* value は choice4 の値 */
+      /* その場でYupの.test()に渡す関数だからわざわざ名前をつける必要がない */
       function (value) {
 
-        /* choice4以外も取得できる */
-        /* this.parent -> フォーム全体の値(test〜category) */
-        const {
-          choice1,
-          choice2,
-          choice3,
-        } = this.parent;
+        /* 【オブジェクトの分割代入】choice4以外も取得できる */
+        /* this.parent -> フォーム全体の値(test〜category)を取得 */
+        const {choice1, choice2, choice3,} = this.parent;
 
         /* 全選択肢を格納した配列 */
         const choices = [
